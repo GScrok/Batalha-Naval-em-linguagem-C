@@ -133,8 +133,42 @@ void escritaJogadaComputador()
     printf(" .\n\n");
 }
 
+void exibirMenu(char *nome)
+{
+    printf("Bem-vindo ao Jogo de Batalha Naval!\n");
+
+    fflush(stdin);
+    printf("Digite seu nome: ");
+    scanf("%s", nome);
+
+    // Remove newline character if present
+    size_t len = strlen(nome);
+    if (len > 0 && nome[len - 1] == '\n')
+    {
+        nome[len - 1] = '\0';
+    }
+
+    printf("1. Iniciar Jogo\n");
+    printf("Escolha uma opção: ");
+
+    int opcao;
+    scanf("%d", &opcao);
+    getchar(); // to consume the newline character left by scanf
+
+    if (opcao != 1)
+    {
+        printf("Opção inválida. Encerrando o programa.\n");
+        exit(1);
+    }
+}
+
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+
+    char nome[50];
+    exibirMenu(nome);
+
     char tabuleiroJogador[TAMANHO][TAMANHO];
     char tabuleiroComputador[TAMANHO][TAMANHO];
     Ponto tiro;
@@ -165,7 +199,7 @@ int main()
         printf("\nTabuleiro do computador:\n");
         imprimirTabuleiro(tabuleiroComputador, 1);
 
-        printf("\nSua vez de jogar. Digite o seu tiro (linha e coluna): ");
+        printf("\n%s, sua vez de jogar. Digite o seu tiro (linha e coluna): ", nome);
         scanf("%d %d", &tiro.x, &tiro.y);
 
         // caso o usuário digite um número fora do tabuleiro
@@ -229,12 +263,12 @@ int main()
 
     if (acertosJogador == NUM_NAVIOS)
     {
-        printf("Voce afundou todos os navios do computador!\n");
+        printf("%s, voce afundou todos os navios do computador!\n", nome);
         system("Ayrton Senna - Tema Da Vitória (Super Mario World Version).mp3");
     }
     else
     {
-        printf("O computador afundou todos os seus navios!\n");
+        printf("O computador afundou todos os seus navios, %s!\n", nome);
         system("SUPER MARIO - game over - sound effect.mp3");
     }
 
