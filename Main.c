@@ -73,6 +73,30 @@ void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
     }
 }
 
+// Permite que o usuário posicione os navios manualmente
+void posicionarNaviosUsuario(char tabuleiro[TAMANHO][TAMANHO])
+{
+    int naviosPosicionados = 0;
+    Ponto navio;
+
+    while (naviosPosicionados < NUM_NAVIOS)
+    {
+        imprimirTabuleiro(tabuleiro, 0);
+        printf("Digite as coordenadas do navio %d (linha e coluna): ", naviosPosicionados + 1);
+        scanf("%d %d", &navio.x, &navio.y);
+
+        if (navio.x >= 0 && navio.x < TAMANHO && navio.y >= 0 && navio.y < TAMANHO && tabuleiro[navio.x][navio.y] == '~')
+        {
+            tabuleiro[navio.x][navio.y] = 'N';
+            naviosPosicionados++;
+        }
+        else
+        {
+            printf("Coordenadas inválidas ou posição já ocupada. Tente novamente.\n");
+        }
+    }
+}
+
 // essa função basicamente compara se as coordenadas batem com algum navio e retorna True ou False
 bool acertou(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro)
 {
@@ -133,7 +157,7 @@ void escritaJogadaComputador()
     printf(" .\n\n");
 }
 
-void exibirMenu(char *nome)
+void exibirMenu(char *nome, int *modo)
 {
     printf("Bem-vindo ao Jogo de Batalha Naval!\n");
 
@@ -148,14 +172,19 @@ void exibirMenu(char *nome)
         nome[len - 1] = '\0';
     }
 
-    printf("1. Iniciar Jogo\n");
+    printf("1. Iniciar Jogo com posicionamento automático\n");
+    printf("2. Iniciar Jogo com posicionamento manual\n");
     printf("Escolha uma opção: ");
 
     int opcao;
     scanf("%d", &opcao);
     getchar(); // to consume the newline character left by scanf
 
-    if (opcao != 1)
+    if (opcao == 1 || opcao == 2)
+    {
+        *modo = opcao;
+    }
+    else
     {
         printf("Opção inválida. Encerrando o programa.\n");
         exit(1);
@@ -167,7 +196,9 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
 
     char nome[50];
-    exibirMenu(nome);
+    int modo;
+
+    exibirMenu(nome, &modo);
 
     char tabuleiroJogador[TAMANHO][TAMANHO];
     char tabuleiroComputador[TAMANHO][TAMANHO];
@@ -184,8 +215,17 @@ int main()
     // srand define a seed para a função rand() gerar números baseados nela.
     // enquanto time(NULL) retorna o tempo em timestamp
     srand(time(NULL));
-    // posiciona os navios de forma aleatória para cada jogador
-    posicionarNavios(tabuleiroJogador);
+
+    // Posiciona os navios de acordo com a escolha do usuário
+    if (modo == 1)
+    {
+        posicionarNavios(tabuleiroJogador);
+    }
+    else
+    {
+        posicionarNaviosUsuario(tabuleiroJogador);
+    }
+
     // necessário para alterar a seed anterior e mudar os aleatórios
     srand(time(NULL) + 1);
     posicionarNavios(tabuleiroComputador);
