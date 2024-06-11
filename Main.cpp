@@ -57,7 +57,7 @@ void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int oculto)
         for (int j = 0; j < TAMANHO; j++)
         {
             // se oculto for como um e for um Navio, ele ira imprimir como '~'
-            // sen„o ele imprimir·° como O para tiro na ·gua e X para acerto
+            // sen√£o ele imprimir√°¬° como O para tiro na √°gua e X para acerto
             if (oculto && tabuleiro[i][j] == 'N')
             {
                 printf("~ ");
@@ -72,7 +72,7 @@ void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int oculto)
     Sleep(1000);
 }
 
-// de forma aleatÛria, substitui as casas do tabuleiro com '~' para 'N'
+// de forma aleat√≥ria, substitui as casas do tabuleiro com '~' para 'N'
 void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
 {
     int naviosPosicionados = 0;
@@ -89,7 +89,7 @@ void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
     }
 }
 
-// Permite que o usu√°rio posicione os navios manualmente
+// Permite que o usu√É¬°rio posicione os navios manualmente
 void posicionarNaviosUsuario(char tabuleiro[TAMANHO][TAMANHO])
 {
     int naviosPosicionados = 0;
@@ -108,18 +108,18 @@ void posicionarNaviosUsuario(char tabuleiro[TAMANHO][TAMANHO])
         }
         else
         {
-            printf("Coordenadas inv·lidas ou posiÁ„o j· ocupada. Tente novamente.\n");
+            printf("Coordenadas inv√°lidas ou posi√ß√£o j√° ocupada. Tente novamente.\n");
         }
     }
 }
 
-// essa fun√ß√£o basicamente compara se as coordenadas batem com algum navio e retorna True ou False
+// essa fun√É¬ß√É¬£o basicamente compara se as coordenadas batem com algum navio e retorna True ou False
 bool acertou(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro)
 {
     return tabuleiro[tiro.x][tiro.y] == 'N';
 }
 
-// se houve acerto marcar√° como um X, se foi um tiro na √°gua, marcar√° como O
+// se houve acerto marcar√É¬° como um X, se foi um tiro na √É¬°gua, marcar√É¬° como O
 void marcarAcertoOuErro(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro, int acerto)
 {
     if (acerto)
@@ -132,7 +132,7 @@ void marcarAcertoOuErro(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro, int acerto
     }
 }
 
-// esta fun√ß√£o serve para retornar true apenas quando a jogada atual n√£o foi realizada anteriormente
+// esta fun√É¬ß√É¬£o serve para retornar true apenas quando a jogada atual n√É¬£o foi realizada anteriormente
 bool jogadaComputadorValida(Ponto jogadasComputador[], int jogadasFeitas, Ponto jogada)
 {
     // verifica todas as jogadas e se, coincidir com alguma, retorna um false imediatamente
@@ -146,11 +146,11 @@ bool jogadaComputadorValida(Ponto jogadasComputador[], int jogadasFeitas, Ponto 
     return true;
 }
 
-// faz a jogada aleatÛria do computador
+// faz a jogada aleat√≥ria do computador
 Ponto jogadaComputador(Ponto jogadasComputador[], int *jogadasFeitas)
 {
     Ponto jogada;
-    // apenas atribui as posiÁıes quando o while atender a condiÁ„o
+    // apenas atribui as posi√ß√µes quando o while atender a condi√ß√£o
     do
     {
         jogada.x = rand() % TAMANHO;
@@ -177,7 +177,7 @@ void exibeHistorico(ParametrosJogo *parametrosRegistros[], int contador){
 	for(int i=0; i < contador; i++){
 		printf("\nRODADA: %d\n", i+1);
 		printf("Vencedor: %s\n", parametrosRegistros[i]->vencedor);
-		printf("PontuaÁ„o: %d\n", parametrosRegistros[i]->pontuacao);
+		printf("Pontua√ß√£o: %d\n", parametrosRegistros[i]->pontuacao);
 		printf("--------------------\n");
 	}
 }
@@ -197,15 +197,15 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
     bool continuar = true;
     while (continuar)
     {
-		printf("\nSelecione a opÁ„o desejada:\n");
+		printf("\nSelecione a op√ß√£o desejada:\n");
     
-	    printf("1. Dificuldade f·cil - 10 navios e sem limite de tempo.\n");
-	    printf("2. Dificuldade mÈdia - 8 navios e limite de 10 minutos.\n");
-	    printf("3. Dificuldade difÌcil - 4 navios e limite de 5 minutos.\n");
-	    printf("4. Visualizar histÛrico.\n");
+	    printf("1. Dificuldade f√°cil - 10 navios e sem limite de tempo.\n");
+	    printf("2. Dificuldade m√©dia - 8 navios e limite de 10 minutos.\n");
+	    printf("3. Dificuldade dif√≠cil - 4 navios e limite de 5 minutos.\n");
+	    printf("4. Visualizar hist√≥rico.\n");
 	    printf("5. Sair.\n");
 	    
-        printf("Escolha uma opÁ„o: ");
+        printf("Escolha uma op√ß√£o: ");
         scanf("%d", &(parametros->dificuldade));
 
         switch (parametros->dificuldade)
@@ -221,7 +221,7 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
             break;
         case 3:
             numNavios = 4;
-            parametros->tempoLimite = 6;
+            parametros->tempoLimite = 300;
             continuar = false;
             break;
         case 4:
@@ -230,13 +230,13 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
         case 5:
             exit(1);
         default:
-            printf("OpÁ„o inv·lida...\n");
+            printf("Op√ß√£o inv√°lida...\n");
         }
     }
 
-    printf("\n1. Iniciar Jogo com posicionamento autom·tico\n");
+    printf("\n1. Iniciar Jogo com posicionamento autom√°tico\n");
     printf("2. Iniciar Jogo com posicionamento manual\n");
-    printf("Escolha uma opÁ„o: ");
+    printf("Escolha uma op√ß√£o: ");
 
     int opcao;
     scanf("%d", &opcao);
@@ -247,14 +247,14 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
     }
     else
     {
-        printf("OpÁ„o inv·lida. Encerrando o programa.\n");
+        printf("Op√ß√£o inv√°lida. Encerrando o programa.\n");
         exit(1);
     }
 }
 
 bool jogoAcabou(){
 	if(atingiuTempoLimite){
-		printf("\nTempo limite atingido. O jogo ser· encerrado.\n");
+		printf("\nTempo limite atingido. O jogo ser√° encerrado.\n");
 		return true;
     }
     return false;
@@ -281,7 +281,7 @@ int main()
 	    char tabuleiroComputador[TAMANHO][TAMANHO];
 	    Ponto tiro;
 	    // esse array de struct serve para registrar todas as jogadas do computador,
-	    // para que ele n„o repita a mesma jogada
+	    // para que ele n√£o repita a mesma jogada
 	    Ponto jogadasComputador[TAMANHO * TAMANHO];
 	    int acertosJogador = 0;
 	    int acertosComputador = 0;
@@ -289,10 +289,10 @@ int main()
 	
 	    inicializarTabuleiro(tabuleiroJogador);
 	    inicializarTabuleiro(tabuleiroComputador);
-	    // srand define a seed para a func„o rand() gerar n˙meros baseados nela.
+	    // srand define a seed para a func√£o rand() gerar n√∫meros baseados nela.
 	    // enquanto time(NULL) retorna o tempo em timestamp
 	    
-	    // Posiciona os navios de acordo com a escolha do usu√°rio
+	    // Posiciona os navios de acordo com a escolha do usu√É¬°rio
 	    if (parametros->modo == 1)
 	    {
 			srand(time(NULL));
@@ -303,7 +303,7 @@ int main()
 	        posicionarNaviosUsuario(tabuleiroJogador);
 	    }
 	
-	    // necess·rio para alterar a seed anterior e mudar os aleatÛrios
+	    // necess√°rio para alterar a seed anterior e mudar os aleat√≥rios
 	    srand(time(NULL) + 1);
 	    posicionarNavios(tabuleiroComputador);
 		
@@ -319,7 +319,7 @@ int main()
 			}
 	        
 	        printf("\nSeu tabuleiro:\n");
-	        // imprime os tabuleiros de ambos os jogadores, um oculto e outro n„o (o 0 e 1 representam isso)
+	        // imprime os tabuleiros de ambos os jogadores, um oculto e outro n√£o (o 0 e 1 representam isso)
 	        imprimirTabuleiro(tabuleiroJogador, 0);
 	
 	        printf("\nTabuleiro do computador:\n");
@@ -332,7 +332,7 @@ int main()
 				break;
 			}
 	        
-	        // caso o usu·rio digite um n˙mero fora do tabuleiro
+	        // caso o usu√°rio digite um n√∫mero fora do tabuleiro
 	        if (tiro.x < 0 || tiro.x >= TAMANHO || tiro.y < 0 || tiro.y >= TAMANHO)
 	        {
 	            printf("Coordenadas invalidas. Tente novamente.\n");
@@ -351,7 +351,7 @@ int main()
 	            printf("Voce atirou na agua!\n");
 	        }
 	
-	        // nesta funÁ„o ele marca no tabuleiro se o jogador/computador acertou ou errou
+	        // nesta fun√ß√£o ele marca no tabuleiro se o jogador/computador acertou ou errou
 	        marcarAcertoOuErro(tabuleiroComputador, tiro, resultadoTiroJogador);
 	
 	        if (acertosJogador == numNavios)
@@ -408,7 +408,7 @@ int main()
 			system("GameOver.mp3");
 	    }
 	    else {
-			printf("VocÍs tiveram um empate, %s!\n", parametros->nome);
+			printf("Voc√™s tiveram um empate, %s!\n", parametros->nome);
 			strcpy(parametros->vencedor, "EMPATE");
 			parametros->pontuacao = acertosJogador;
 	        system("GameOver.mp3");
