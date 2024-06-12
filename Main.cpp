@@ -73,6 +73,13 @@ void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int oculto)
     Sleep(1000);
 }
 
+//funcao para imprimir tabuleiro do adversario no final do jogo
+void imprimeTabuleiroAdversario(char tabuleiro[TAMANHO][TAMANHO])
+{
+	printf("\nO tabuleiro do seu adversário era:\n");
+	imprimirTabuleiro(tabuleiro, 0);
+}
+
 // de forma aleatoria, substitui as casas do tabuleiro com '~' para 'N'
 void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
 {
@@ -413,8 +420,7 @@ int main()
 	        strcpy(parametros->vencedor, "Computador");
 	        parametros->pontuacao = acertosComputador;
 			
-			printf("\nO tabuleiro do seu adversário era:\n");
-	        imprimirTabuleiro(tabuleiroComputador, 0);
+			imprimeTabuleiroAdversario(tabuleiroComputador);
 			
 			system("GameOver.mp3");
 	    }
@@ -423,8 +429,7 @@ int main()
 			strcpy(parametros->vencedor, "EMPATE");
 			parametros->pontuacao = acertosJogador;
 	        
-			printf("\nO tabuleiro do seu adversário era:\n");
-	        imprimirTabuleiro(tabuleiroComputador, 0);
+			imprimeTabuleiroAdversario(tabuleiroComputador);
 			
 			system("GameOver.mp3");
 	    }
