@@ -20,6 +20,7 @@ typedef struct
     int y;
 } Ponto;
 
+//struct que define os parametros do jogo
 typedef struct
 {
     char nome[50];
@@ -57,7 +58,7 @@ void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int oculto)
         for (int j = 0; j < TAMANHO; j++)
         {
             // se oculto for como um e for um Navio, ele ira imprimir como '~'
-            // senão ele imprimirá¡ como O para tiro na água e X para acerto
+            // senão ele imprimira como O para tiro na agua e X para acerto
             if (oculto && tabuleiro[i][j] == 'N')
             {
                 printf("~ ");
@@ -72,7 +73,7 @@ void imprimirTabuleiro(char tabuleiro[TAMANHO][TAMANHO], int oculto)
     Sleep(1000);
 }
 
-// de forma aleatória, substitui as casas do tabuleiro com '~' para 'N'
+// de forma aleatoria, substitui as casas do tabuleiro com '~' para 'N'
 void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
 {
     int naviosPosicionados = 0;
@@ -89,7 +90,7 @@ void posicionarNavios(char tabuleiro[TAMANHO][TAMANHO])
     }
 }
 
-// Permite que o usuÃ¡rio posicione os navios manualmente
+// Permite que o usuario posicione os navios manualmente
 void posicionarNaviosUsuario(char tabuleiro[TAMANHO][TAMANHO])
 {
     int naviosPosicionados = 0;
@@ -108,18 +109,18 @@ void posicionarNaviosUsuario(char tabuleiro[TAMANHO][TAMANHO])
         }
         else
         {
-            printf("Coordenadas inválidas ou posição já ocupada. Tente novamente.\n");
+            printf("Coordenadas invalidas ou posicao ja ocupada. Tente novamente.\n");
         }
     }
 }
 
-// essa funÃ§Ã£o basicamente compara se as coordenadas batem com algum navio e retorna True ou False
+// essa funcao basicamente compara se as coordenadas batem com algum navio e retorna True ou False
 bool acertou(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro)
 {
     return tabuleiro[tiro.x][tiro.y] == 'N';
 }
 
-// se houve acerto marcarÃ¡ como um X, se foi um tiro na Ã¡gua, marcarÃ¡ como O
+// se houve acerto marca com um X, se foi um tiro na agua, marca como O
 void marcarAcertoOuErro(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro, int acerto)
 {
     if (acerto)
@@ -132,7 +133,7 @@ void marcarAcertoOuErro(char tabuleiro[TAMANHO][TAMANHO], Ponto tiro, int acerto
     }
 }
 
-// esta funÃ§Ã£o serve para retornar true apenas quando a jogada atual nÃ£o foi realizada anteriormente
+// esta funcao serve para retornar true apenas quando a jogada atual nao foi realizada anteriormente
 bool jogadaComputadorValida(Ponto jogadasComputador[], int jogadasFeitas, Ponto jogada)
 {
     // verifica todas as jogadas e se, coincidir com alguma, retorna um false imediatamente
@@ -146,11 +147,11 @@ bool jogadaComputadorValida(Ponto jogadasComputador[], int jogadasFeitas, Ponto 
     return true;
 }
 
-// faz a jogada aleatória do computador
+// faz a jogada aleatoria do computador
 Ponto jogadaComputador(Ponto jogadasComputador[], int *jogadasFeitas)
 {
     Ponto jogada;
-    // apenas atribui as posições quando o while atender a condição
+    // apenas atribui as posicoes quando o while atender a condicao
     do
     {
         jogada.x = rand() % TAMANHO;
@@ -177,11 +178,12 @@ void exibeHistorico(ParametrosJogo *parametrosRegistros[], int contador){
 	for(int i=0; i < contador; i++){
 		printf("\nRODADA: %d\n", i+1);
 		printf("Vencedor: %s\n", parametrosRegistros[i]->vencedor);
-		printf("Pontuação: %d\n", parametrosRegistros[i]->pontuacao);
+		printf("Pontuacao: %d\n", parametrosRegistros[i]->pontuacao);
 		printf("--------------------\n");
 	}
 }
 
+//menu de exibicao para coletar o nome do 
 void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[], int contador)
 {   
     if (!contador){
@@ -189,23 +191,25 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
 
         fflush(stdin);
         printf("Digite seu nome: ");
+        //nome e uma variavel global pois nao vai mudar  jogador no meio do jogo
         scanf("%s", &nome);
     }
-	
+	 
 	strcpy(parametros->nome, nome);
     
+    //so sai do while quando selecionar ou sair, ou uma das dificuldades do jogo
     bool continuar = true;
     while (continuar)
     {
-		printf("\nSelecione a opção desejada:\n");
+		printf("\nSelecione a opcao desejada:\n");
     
-	    printf("1. Dificuldade fácil - 10 navios e sem limite de tempo.\n");
-	    printf("2. Dificuldade média - 8 navios e limite de 10 minutos.\n");
-	    printf("3. Dificuldade difícil - 4 navios e limite de 5 minutos.\n");
-	    printf("4. Visualizar histórico.\n");
+	    printf("1. Dificuldade facil - 10 navios e sem limite de tempo.\n");
+	    printf("2. Dificuldade media - 8 navios e limite de 10 minutos.\n");
+	    printf("3. Dificuldade dificil - 4 navios e limite de 5 minutos.\n");
+	    printf("4. Visualizar historico.\n");
 	    printf("5. Sair.\n");
 	    
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &(parametros->dificuldade));
 
         switch (parametros->dificuldade)
@@ -230,13 +234,13 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
         case 5:
             exit(1);
         default:
-            printf("Opção inválida...\n");
+            printf("Opcao invalida...\n");
         }
     }
 
-    printf("\n1. Iniciar Jogo com posicionamento automático\n");
+    printf("\n1. Iniciar Jogo com posicionamento automatico\n");
     printf("2. Iniciar Jogo com posicionamento manual\n");
-    printf("Escolha uma opção: ");
+    printf("Escolha uma opcao: ");
 
     int opcao;
     scanf("%d", &opcao);
@@ -247,19 +251,21 @@ void exibirMenu(ParametrosJogo *parametros, ParametrosJogo *parametrosRegistros[
     }
     else
     {
-        printf("Opção inválida. Encerrando o programa.\n");
+        printf("Opcao invalida. Encerrando o programa.\n");
         exit(1);
     }
 }
 
+//funcao para validar se atingiuTempoLimite esta como true e dessa forma encerrar o jogo
 bool jogoAcabou(){
 	if(atingiuTempoLimite){
-		printf("\nTempo limite atingido. O jogo será encerrado.\n");
+		printf("\nTempo limite atingido. O jogo sera encerrado.\n");
 		return true;
     }
     return false;
 }
 
+//apenas faz referencia para a funcao thread
 void tempoLimiteEncerramento(void *);
 
 int main()
@@ -289,10 +295,10 @@ int main()
 	
 	    inicializarTabuleiro(tabuleiroJogador);
 	    inicializarTabuleiro(tabuleiroComputador);
-	    // srand define a seed para a funcão rand() gerar números baseados nela.
+	    // srand define a seed para a funcao rand() gerar numeros baseados nela.
 	    // enquanto time(NULL) retorna o tempo em timestamp
 	    
-	    // Posiciona os navios de acordo com a escolha do usuÃ¡rio
+	    // Posiciona os navios de acordo com a escolha do usuario
 	    if (parametros->modo == 1)
 	    {
 			srand(time(NULL));
@@ -303,7 +309,7 @@ int main()
 	        posicionarNaviosUsuario(tabuleiroJogador);
 	    }
 	
-	    // necessário para alterar a seed anterior e mudar os aleatórios
+	    // necessario para alterar a seed anterior e mudar os aleatorios
 	    srand(time(NULL) + 1);
 	    posicionarNavios(tabuleiroComputador);
 		
@@ -319,7 +325,7 @@ int main()
 			}
 	        
 	        printf("\nSeu tabuleiro:\n");
-	        // imprime os tabuleiros de ambos os jogadores, um oculto e outro não (o 0 e 1 representam isso)
+	        // imprime os tabuleiros de ambos os jogadores, um oculto e outro nao (o 0 e 1 representam isso)
 	        imprimirTabuleiro(tabuleiroJogador, 0);
 	
 	        printf("\nTabuleiro do computador:\n");
@@ -332,7 +338,7 @@ int main()
 				break;
 			}
 	        
-	        // caso o usuário digite um número fora do tabuleiro
+	        // caso o usuario digite um numero fora do tabuleiro
 	        if (tiro.x < 0 || tiro.x >= TAMANHO || tiro.y < 0 || tiro.y >= TAMANHO)
 	        {
 	            printf("Coordenadas invalidas. Tente novamente.\n");
@@ -351,7 +357,7 @@ int main()
 	            printf("Voce atirou na agua!\n");
 	        }
 	
-	        // nesta função ele marca no tabuleiro se o jogador/computador acertou ou errou
+	        // nesta funcao ele marca no tabuleiro se o jogador/computador acertou ou errou
 	        marcarAcertoOuErro(tabuleiroComputador, tiro, resultadoTiroJogador);
 	
 	        if (acertosJogador == numNavios)
@@ -408,7 +414,7 @@ int main()
 			system("GameOver.mp3");
 	    }
 	    else {
-			printf("Vocês tiveram um empate, %s!\n", parametros->nome);
+			printf("Voces tiveram um empate, %s!\n", parametros->nome);
 			strcpy(parametros->vencedor, "EMPATE");
 			parametros->pontuacao = acertosJogador;
 	        system("GameOver.mp3");
@@ -416,11 +422,14 @@ int main()
 	    
 		printf("Pressione qualquer tecla para continuar!\n");
 	    getch();
+	    //insere no vetor de structs na posicao do contador o struct de parametros atual
 	    parametrosRegistros[contador] = parametros;
 	    
+	    //limpa a struct alocada dinamicamente
 		free(parametros);
 		parametros = NULL;
 
+		//incrementa o contador e reseta as variaveis de controle do jogo
 		contador++;
 		atingiuTempoLimite = false;
 		acabouJogo = false;
@@ -428,7 +437,7 @@ int main()
 	
     return 0;
 }
-
+//thread que faz a contagem do tempo e a define globalmente para parar o jogo
 void tempoLimiteEncerramento(void *tempoLimite) {
     int segundos = 0;
     int limite = *((int*)tempoLimite);
