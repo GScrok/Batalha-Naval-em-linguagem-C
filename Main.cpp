@@ -401,7 +401,7 @@ int main()
 		
 	    if (acertosJogador > acertosComputador)
 	    {
-	        printf("%s, voce afundou mais os navios do computador! %d - Navios", parametros->nome, acertosJogador);
+	        printf("%s, voce afundou mais os navios do computador! %d - Navio(s)", parametros->nome, acertosJogador);
 	        strcpy(parametros->vencedor, parametros->nome);
 	        parametros->pontuacao = acertosJogador;
 	        
@@ -409,7 +409,7 @@ int main()
 	    }
 	    else if (acertosJogador < acertosComputador)
 	    {
-	        printf("O computador afundou mais os seus navios, %s! %d - Navios", parametros->nome, acertosComputador);
+	        printf("O computador afundou mais os seus navios, %s! %d - Navio(s)", parametros->nome, acertosComputador);
 	        strcpy(parametros->vencedor, "Computador");
 	        parametros->pontuacao = acertosComputador;
 			
@@ -419,7 +419,7 @@ int main()
 			system("GameOver.mp3");
 	    }
 	    else {
-			printf("Voces tiveram um empate, %s! %d - Navios\n", parametros->nome, acertosJogador);
+			printf("Voces tiveram um empate, %s! %d - Navio(s)\n", parametros->nome, acertosJogador);
 			strcpy(parametros->vencedor, "EMPATE");
 			parametros->pontuacao = acertosJogador;
 	        
